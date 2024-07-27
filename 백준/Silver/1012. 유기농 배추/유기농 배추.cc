@@ -6,16 +6,17 @@ using namespace std;
 int dx[] = {-1, 1, 0, 0};
 int dy[] = {0, 0, -1, 1};
 
-void dfs(int x, int y, vector<vector<bool>>& visited, vector<vector<int>>& map) {
-    visited[x][y] = true;
+void dfs(int a, int b, vector<vector<int>> &map, vector<vector<int>> &visited) {
+    if (a < 0 || a >= map.size() || b < 0 || b >= map[0].size() || visited[a][b] || map[a][b] == 0) {
+        return;
+    }
+    
+    visited[a][b] = 1;
 
-    for (int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
-
-        if (nx >= 0 && nx < map.size() && ny >= 0 && ny < map[0].size() && map[nx][ny] == 1 && !visited[nx][ny]) {
-            dfs(nx, ny, visited, map);
-        }
+    for (int direction = 0; direction < 4; direction++) {
+        int na = a + dx[direction];
+        int nb = b + dy[direction];
+        dfs(na, nb, map, visited);
     }
 }
 
@@ -23,25 +24,25 @@ int main() {
     int test_case;
     cin >> test_case;
 
-    for (int i = 0; i < test_case; i++) {
-        int n, m, cabbage;
-        cin >> n >> m >> cabbage;
+    for (int test = 0; test < test_case; test++) {
+        int n, m, k;
+        cin >> n >> m >> k;
 
         vector<vector<int>> map(n, vector<int>(m, 0));
-        vector<vector<bool>> visited(n, vector<bool>(m, false));
+        vector<vector<int>> visited(n, vector<int>(m, 0));
 
-        for (int j = 0; j < cabbage; j++) {
+        for (int cabbage = 0; cabbage < k; cabbage++) {
             int x, y;
-            cin >> x >> y;
-            map[x][y] = 1;
+            cin >> y >> x;
+            map[y][x] = 1; 
         }
 
         int count = 0;
 
-        for (int x = 0; x < n; x++) {
-            for (int y = 0; y < m; y++) {
-                if (map[x][y] == 1 && !visited[x][y]) {
-                    dfs(x, y, visited, map);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (map[i][j] == 1 && !visited[i][j]) {
+                    dfs(i, j, map, visited);
                     count++;
                 }
             }
