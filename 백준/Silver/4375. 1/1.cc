@@ -2,23 +2,17 @@
 
 using namespace std;
 
-int main() {
-    long long num;
-    while (cin >> num) {
-        long long na = 1;
-        long long length = 1;
-
-        while (true) {
-            if (na % num == 0) {
-                cout << length << endl;
-                break;
-            }
-            else{
-                na = na*10 +1;
-                na = na%num;
-                length++;
-            }
+int main(){
+    int x;
+    
+    while(cin >> x){
+        int i = 1;
+        int count = 1;
+        while(i % x != 0){
+            i = (i * 10 + 1) % x;
+            ++count;
         }
+        cout << count << endl;
     }
     
     return 0;
