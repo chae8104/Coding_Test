@@ -19,8 +19,6 @@ int main(){
         for(int y =0; y < B; y++){
             cin >> vb[y];
         }
-        sort(va.begin(), va.end());
-        sort(vb.begin(), vb.end());
         
         for(int p = 0; p < A; p++){
             for(int q = 0; q < B; q++){
