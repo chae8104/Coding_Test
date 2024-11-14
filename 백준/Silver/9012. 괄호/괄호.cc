@@ -3,36 +3,35 @@
 
 using namespace std;
 
-int main() {
-    int test_case;
-    cin >> test_case;
-    
-    for (int i = 0; i < test_case; i++) {
+int main(){
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++){
         string s;
         cin >> s;
         stack<char> st;
-        bool isValid = true;
         
-        for (char c : s) {
-            if (c == '(') {
+        bool is = true;
+        
+        for(char c : s){
+            if(c == '('){
                 st.push(c);
-            } else if (c == ')') {
-                if (!st.empty() && st.top() == '(') {
-                    st.pop();
-                } else {
-                    isValid = false;
+            } else if(c == ')'){
+                if(st.empty()){
+                    is = false;
                     break;
+                } else {
+                    st.pop();
                 }
             }
         }
         
-        if (isValid && st.empty()) {
-            cout << "YES" << endl;
-        } else {
-            cout << "NO" << endl;
+        if(!st.empty()){
+            is = false;
         }
+        
+        cout << (is ? "YES" : "NO") << endl;
     }
-    
     
     return 0;
 }
