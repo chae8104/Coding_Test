@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <limits.h>
 
 using namespace std;
 
@@ -9,14 +8,14 @@ int N, M;
 vector<pair<int, int>> houses;
 vector<pair<int, int>> chickens;
 vector<vector<int>> chicken_combi;
-int min_chicken_distance = INT_MAX;
+int min_chicken_distance = 2000000000; 
 
 int calculate_chicken_distance(const vector<pair<int, int>>& selected_chickens) {
     int total_distance = 0;
 
-    for (const auto& house : houses) {
-        int min_distance = INT_MAX;
-        for (const auto& chicken : selected_chickens) {
+    for (auto& house : houses) {
+        int min_distance = 2000000000;
+        for (auto& chicken : selected_chickens) {
             int distance = abs(house.first - chicken.first) + abs(house.second - chicken.second);
             min_distance = min(min_distance, distance);
         }
